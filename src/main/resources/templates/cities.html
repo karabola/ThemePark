@@ -12,11 +12,13 @@
     <thead>
     <tr>
         <th style="border: 1px solid black; padding: 8px;">City name</th>
+        <th style="border: 1px solid black; padding: 8px;">Province</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="city : ${cities}">
         <td style="border: 1px solid black; padding: 8px;" th:text="${city.name}"></td>
+        <td style="border: 1px solid black; padding: 8px;" th:text="${city.province.name}"></td>
     </tr>
     </tbody>
 </table>

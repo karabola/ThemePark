@@ -17,6 +17,7 @@ public class ParkController {
      * The method displays a list of parks as an HTML page;
      *
      * @return expects the file parks.html
+     * http://localhost:8081/themePark/parks
      */
     @GetMapping
     public String getParks(Model model) {

@@ -15,14 +15,15 @@
             <thead>
             <th style="border: 1px solid black; padding: 8px;">Name</th>
             <th style="border: 1px solid black; padding: 8px;">City</th>
+            <th style="border: 1px solid black; padding: 8px;">Province</th>
             <th style="border: 1px solid black; padding: 8px;">Description</th>
 
             </thead>
             <tbody>
             <tr th:each="park: ${parks}">
                 <td style="border: 1px solid black; padding: 8px;" th:text="${park.name}"></td>
-<!--                <td th:text="${parks.id_city}"></td>-->
                 <td style="border: 1px solid black; padding: 8px;" th:text="${park.city.name}"></td>
+                <td style="border: 1px solid black; padding: 8px;" th:text="${park.province.name}"></td>
                 <td style="border: 1px solid black; padding: 8px;" th:text="${park.description}"></td>
             </tr>
             </tbody>

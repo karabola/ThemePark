@@ -1,6 +1,7 @@
 package com.basic.themePark.parks.core;
 
 import com.basic.themePark.cities.core.City;
+import com.basic.themePark.provinces.core.Province;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +22,9 @@ public class Park {
     @ManyToOne
     @JoinColumn(name = "id_city")
     private City city;
+
+    @ManyToOne
+    @JoinColumn(name = "id_province")
+    private Province province;
     private String description;
 }

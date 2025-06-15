@@ -24,6 +24,7 @@ public class CityController {
      * The method displays a list of cities as an HTML page;
      *
      * @return expects the file cities.html
+     * http://localhost:8081/themePark/cities
      */
     @GetMapping
     public String getCities(Model model) {

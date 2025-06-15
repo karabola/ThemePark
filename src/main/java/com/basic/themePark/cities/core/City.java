@@ -1,5 +1,6 @@
 package com.basic.themePark.cities.core;
 
+import com.basic.themePark.provinces.core.Province;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,4 +19,7 @@ public class City {
     @GeneratedValue
     private UUID id_city;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "id_province")
+    private Province province;
 }
