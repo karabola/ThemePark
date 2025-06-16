@@ -1,14 +1,16 @@
 package com.basic.themePark.provinces.controller;
 
+import com.basic.themePark.cities.core.City;
+import com.basic.themePark.provinces.core.Province;
 import com.basic.themePark.provinces.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/provinces")
-@Controller
+@RestController
 public class ProvinceController {
     @Autowired
     private ProvinceService provinceService;
@@ -20,8 +22,13 @@ public class ProvinceController {
      * http://localhost:8081/themePark/provinces
      */
     @GetMapping
-    public String getProvinces(Model model) {
-        model.addAttribute("provinces", provinceService.getAllProvinces());
-        return "provinces";
+    public List<Province> getProvince() {
+        return provinceService.getAllProvinces();
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addProvince(@RequestBody Province province) {
+        provinceService.addProvince(province);
+        return ResponseEntity.ok("The new province has been added successfully!");
     }
 }

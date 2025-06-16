@@ -4,6 +4,7 @@ import com.basic.themePark.provinces.core.Province;
 import com.basic.themePark.provinces.dao.ProvinceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,5 +15,13 @@ public class ProvinceService {
 
     public List<Province> getAllProvinces() {
         return provinceDao.findAll();
+    }
+
+    @Transactional
+    public Province addProvince(Province province) {
+        if (province.getName() != null) {
+            provinceDao.save(province);
+        }
+        return province;
     }
 }

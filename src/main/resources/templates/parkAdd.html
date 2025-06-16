@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add park</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <script>
+        function toggleNewCity() {
+            let newCitySection = document.getElementById("newCitySection");
+           newCitySection.style.display = "block";}
+
+        function toggleNewProvince() {
+            let newProvinceSection = document.getElementById("newProvinceSection");
+            newProvinceSection.style.display = document.getElementById("province").value === "new" ? "block" : "none";
+        }
+
+    </script>
+</head>
+<body>
+<h1 style="background-color: blue; color: white; padding: 10px;">Add new park</h1>
+<form th:action="@{/parks/add}" th:object="${parkToAdd}" method="post">
+    <div class="form-container">
+
+        <!---Park name--->
+        <label for="name" class="form-label">PARK NAME:</label>
+        <input type="text" id="name" th:field="*{name}" class="form-input" required>
+
+        <!---City--->
+        <label for="city"class="form-label" >City:</label>
+        <select id="city" th:field="*{city}" class="form-select" required>
+            <option value="new">Select</option>
+            <option th:each="c : ${cities}" th:value="${c.id_city}" th:text="${c.name}"></option>
+        </select>
+        <button type="button" onclick="toggleNewCity()" class="form-button">ADD NEW</button>
+
+        <div id="newCitySection" style="display: none;">
+            <label for="newCity">NEW:</label>
+            <input type="text" id="newCity" name="newCity" class="form-input">
+            <button type="button" onclick="saveCity()" class="form-button">Save</button>
+        </div>
+        <script>
+    function saveCity() {
+        let cityName = document.getElementById("newCity").value;
+        if (cityName.trim() === "") {
+            alert("Add new city!");
+            return;
+        }
+
+        fetch("/themePark/cities/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: cityName })
+        }).then(response => response.text())
+          .then(data => alert(data))
+          .catch(error => console.error("Error:", error));
+    }
+
+        </script>
+        <!---Province--->
+        <label for="province" class="form-label">Province:</label>
+        <select id="province" th:field="*{province}" class="form-select" onchange="toggleNewProvince()" required>
+            <option value="new">Select</option>
+            <option th:each="p : ${provinces}" th:value="${p.id_province}" th:text="${p.name}"></option>
+        </select>
+        <button type="button" onclick="toggleNewProvince()" class="form-button">ADD NEW</button>
+        <div id="newProvinceSection" style="display: none;">
+            <label for="newProvince" class="form-label">NEW</label>
+            <input type="text" id="newProvince" name="newProvince" class="form-input">
+            <button type="button" onclick="saveProvince()" class="form-button">Save</button>
+        </div>
+        <script>
+    function saveProvince() {
+        let provinceName = document.getElementById("newProvince").value;
+        if (provinceName.trim() === "") {
+            alert("Add a new province!");
+            return;
+        }
+
+        fetch("/provinces/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: provinceName })
+        }).then(response => response.text())
+          .then(data => alert(data))
+          .catch(error => console.error("Błąd:", error));
+    }
+
+        </script>
+        <!---Description--->
+        <label for="description" class="form-label">Description:</label>
+        <textarea id="description" th:field="*{description}" class="form-textarea" rows="4"></textarea>
+
+        <button type="submit" class="submit-button">SAVE</button>
+    </div>
+</form>
+</body>
+</html>

@@ -18,9 +18,10 @@ public class CityService {
     }
 
     @Transactional
-    public void addCity(City city) {
+    public City addCity(City city) {
         if (city.getName() != null) {
             cityDao.save(city);
         }
+        return city;
     }
 }
