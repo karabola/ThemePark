@@ -4,8 +4,10 @@ import com.basic.themePark.cities.CityProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 @SpringBootApplication
 @RestController
@@ -16,8 +18,8 @@ public class ThemeParkApplication {
         SpringApplication.run(ThemeParkApplication.class, args);
     }
 
-//    @GetMapping
-//    RedirectView home() {
-//        return new RedirectView("cities");
-//    }
+    @GetMapping
+    RedirectView home() {
+        return new RedirectView("main");
+    }
 }

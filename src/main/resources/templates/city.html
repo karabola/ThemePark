@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parki w mieście</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <style>
+        .city-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 50px auto;
+            width: 50%;
+            text-align: center;
+            color: white;
+        }
+        .park-container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 20px auto;
+            width: 60%;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .park-container h2 {
+            color: #ff8800;
+        }
+    </style>
+</head>
+<body>
+
+<div class="city-container">
+    <h1 th:text="${city.name}"></h1>
+</div>
+<div th:each="park : ${parks}">
+    <h2 th:text="${park.name}"></h2>
+    <p th:text="${park.description}"></p>
+</div>
+<div th:if="${parks.isEmpty()}">
+    <p>Brak parków w tym mieście.</p>
+</div>
+
+
+</body>
+</html>

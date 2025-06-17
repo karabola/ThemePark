@@ -13,12 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping("/parks")
 @Controller
@@ -63,10 +61,8 @@ public class ParkController {
     }
 
     /**
-     * 
      * @param park
-     * @return
-     * http://localhost:8081/themePark/parks/add
+     * @return http://localhost:8081/themePark/parks/add
      */
     @PostMapping("/add")
     public ResponseEntity<String> addPark(@RequestBody Park park) {
@@ -93,8 +89,40 @@ public class ParkController {
 
         return ResponseEntity.ok("Park added successfully!");
     }
-    @GetMapping("/test-css")
-    public ResponseEntity<String> checkCss() {
-        return ResponseEntity.ok("Plik CSS działa poprawnie!");
+
+    /**
+     *
+     * @param cityName
+     * @param model
+     * @return
+     * http://localhost:8081/themePark/parks/zator
+     */
+    @GetMapping("/{cityName}")
+    public String getParksByCity(@PathVariable("cityName")  String cityName, Model model) {
+        List<Park> collect = parkService.getAllParks().stream()
+                .filter(p -> p.getCity().getName().equalsIgnoreCase(cityName))
+                .collect(Collectors.toList());
+        if (cityName != null || !cityName.isEmpty()) {
+
+            model.addAttribute("parks", collect);
+        } else {
+            model.addAttribute("parks", parkService.getAllParks());
+        }
+        return "parks";
     }
+
+
+//    @GetMapping("/{query}")
+//    public List<Park> getParksBySearch(@PathVariable String query) {
+//        return parkService.getAllParks().stream()
+//                .filter(p -> p.getName().equalsIgnoreCase(query) || p.getCity().getName().equalsIgnoreCase(query) || p.getProvince().getName().equalsIgnoreCase(query))
+//                .collect(Collectors.toList());
+//    }
+
+//    @GetMapping("/{cityName}")
+//    public List<Park> getParksByCity(@PathVariable String cityName) {
+//        List<Park> parksByCity = parkService.getParksByCity(cityName);
+//        System.out.println("parksByCity = " + parksByCity);
+//        return parksByCity;
+//    }
 }

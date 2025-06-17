@@ -1,13 +1,17 @@
 package com.basic.themePark.cities.controller;
 
 import com.basic.themePark.cities.core.City;
+import com.basic.themePark.cities.dao.CityDao;
 import com.basic.themePark.cities.service.CityService;
+import com.basic.themePark.parks.service.ParkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequestMapping("/cities")
@@ -15,6 +19,10 @@ import java.util.stream.Collectors;
 public class CityController {
     @Autowired
     private CityService cityService;
+    @Autowired
+    private CityDao cityDao;
+    @Autowired
+    private ParkService parkService;
 
     /**
      * The method displays a list of cities as an HTML page;
@@ -22,12 +30,12 @@ public class CityController {
      * @return expects the file cities.html
      * http://localhost:8081/themePark/cities
      */
-    @GetMapping
-    public List<City> getCities() {
-        List<City> allCities = cityService.getAllCities();
-        allCities.forEach(c-> System.out.println("City: "+c.getName()));
-        return allCities;
-    }
+//    @GetMapping
+//    public List<City> getCities() {
+//        List<City> allCities = cityService.getAllCities();
+//        allCities.forEach(c-> System.out.println("City: "+c.getName()));
+//        return allCities;
+//    }
 
     /**
      * The method answers on the HTTP GET request, which was sent to http://localhost:8081/themePark/cities/search/{cityName}
@@ -49,6 +57,4 @@ public class CityController {
         cityService.addCity(city);
         return ResponseEntity.ok("The new city has been added successfully!");
     }
-
-
 }

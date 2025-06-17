@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Park rozrywki</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <style th:inline="text">
+    body {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-image: url([[${@environment.getProperty('server.servlet.context-path')}]]/mainPagePicture.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+        color: #001F4D;
+    }
+</style>
+</head>
+
+
+<body>
+<div class="header">Znajdź idealny park rozrywki dla siebie! </div>
+<div class="left-content">Szukasz pomysłu na niezapomniany dzień pełen atrakcji? W naszej wyszukiwarce szybko znajdziesz parki rozrywki w całej Polsce. Wpisz nazwę miasta, województwa lub konkretnego parku, a my pokażemy Ci listę dostępnych miejsc wraz z opisem, lokalizacją i szczegółami, które pomogą Ci wybrać najlepszą opcję dla siebie i Twoich bliskich.</div>
+<div class="search-container">
+    <form action="#">
+        <input type="text" placeholder="Wpisz nazwę parku, miasto lub województwo">
+        <input type="submit" value="Szukaj">
+    </form>
+</div>
+</body>
+</html>
