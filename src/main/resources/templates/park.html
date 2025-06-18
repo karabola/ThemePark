@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${park.name}">Park rozrywki</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <style th:inline="text">
+    body {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-image: url([[${@environment.getProperty('server.servlet.context-path')}]]/part.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+        color: #001F4D;
+    }
+
+
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+
+</head>
+<body>
+<div class="header">
+    <div th:text="${park.name}">Nazwa Parku</div>
+    <div class="subheader">
+        <span th:text="${park.city.name}">Miasto</span>, <span th:text="${park.province.name}">Województwo</span>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="description" th:utext="${park.description}">Opis parku rozrywki.</div>
+
+    <div id="image-carousel" class="splide" style="margin: 60px auto; max-width: 90%;">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide"><img th:src="@{/parkImages/1.jpg}" alt="Zdjęcie 1"></li>
+                <li class="splide__slide"><img th:src="@{/parkImages/2.jpg}" alt="Zdjęcie 2"></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script>
+  document.addEventListener( 'DOMContentLoaded', function () {
+    new Splide( '#image-carousel', {
+      type    : 'loop',
+      perPage : 3,
+      focus   : 'center',
+      gap     : '2rem',
+      breakpoints: {
+        768: { perPage: 1 }
+      }
+    } ).mount();
+  } );
+
+</script>
+</body>
+</html>

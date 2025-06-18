@@ -1,5 +1,6 @@
 package com.basic.themePark.parks.controller;
 
+import com.basic.themePark.DescriptionFormatter;
 import com.basic.themePark.cities.core.City;
 import com.basic.themePark.cities.dao.CityDao;
 import com.basic.themePark.cities.service.CityService;
@@ -15,8 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @RequestMapping("/parks")
 @Controller
@@ -37,7 +37,7 @@ public class ParkController {
     /**
      * The method displays a list of parks as an HTML page;
      *
-     * @return expects the file parks.html
+     * @return expects the file park.html
      * http://localhost:8081/themePark/parks
      */
     @GetMapping
@@ -84,31 +84,38 @@ public class ParkController {
             province = provinceDao.save(newProvince);
         }
 
-        park = new Park(null, park.getName(), city, province, park.getDescription());
+        park = new Park(null, park.getName(), city, province, park.getDescription(), park.getImageUrl());
         parkDao.save(park);
 
         return ResponseEntity.ok("Park added successfully!");
     }
 
     /**
-     *
-     * @param cityName
+     * @param parkName
      * @param model
-     * @return
-     * http://localhost:8081/themePark/parks/zator
+     * @return http://localhost:8081/themePark/parks/zatorland
      */
-    @GetMapping("/{cityName}")
-    public String getParksByCity(@PathVariable("cityName")  String cityName, Model model) {
-        List<Park> collect = parkService.getAllParks().stream()
-                .filter(p -> p.getCity().getName().equalsIgnoreCase(cityName))
-                .collect(Collectors.toList());
-        if (cityName != null || !cityName.isEmpty()) {
-
-            model.addAttribute("parks", collect);
-        } else {
-            model.addAttribute("parks", parkService.getAllParks());
+    @GetMapping("/{parkName}")
+    public String getFilteredPark(@PathVariable String parkName, Model model) {
+        if (parkName == null || parkName.isBlank()) {
+            return "redirect:/parks";
         }
-        return "parks";
+
+        Optional<Park> optionalPark = parkService.getAllParks().stream()
+                .filter(p -> p.getName().equalsIgnoreCase(parkName))
+                .findFirst();
+
+        if (optionalPark.isPresent()) {
+            Park park = optionalPark.get();
+
+            String formattedDescription = DescriptionFormatter.format(park.getDescription());
+            park.setDescription(formattedDescription);
+
+            model.addAttribute("park", park);
+            return "park";
+        }
+
+        return "redirect:/parks";
     }
 
 

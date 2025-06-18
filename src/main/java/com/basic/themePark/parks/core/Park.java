@@ -27,5 +27,7 @@ public class Park {
     @ManyToOne
     @JoinColumn(name = "id_province")
     private Province province;
+    @Column(length = 1000)
     private String description;
+    private String imageUrl;
 }
