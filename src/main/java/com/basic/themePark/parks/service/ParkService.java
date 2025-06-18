@@ -6,8 +6,13 @@ import com.basic.themePark.parks.dao.ParkDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ParkService {
@@ -23,4 +28,21 @@ public class ParkService {
         return parkDao.findAll().stream()
                 .filter(p -> p.getCity().getName().equalsIgnoreCase(cityName)).collect(Collectors.toList());
     }
+
+    public List<String> getImagesForPark(Park park) {
+        String parkName = park.getName().toLowerCase().replaceAll("\\s+", "");
+        String directoryPath = "src/main/resources/static/parkImages";
+
+        try (Stream<Path> files = Files.list(Paths.get(directoryPath))) {
+            return files
+                    .filter(Files::isRegularFile)
+                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .filter(name -> name.startsWith(parkName))
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            return List.of();
+        }
+    }
+
 }

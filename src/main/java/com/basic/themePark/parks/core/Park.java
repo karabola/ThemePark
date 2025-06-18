@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -29,5 +30,7 @@ public class Park {
     private Province province;
     @Column(length = 1000)
     private String description;
-    private String imageUrl;
+    private List<String> imagesPaths;
+
+
 }

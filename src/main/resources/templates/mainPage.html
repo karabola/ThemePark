@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Park rozrywki</title>
+    <title>Wyszukiwarka parków</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
     <style th:inline="text">
     body {
@@ -24,10 +24,16 @@
 <div class="header">Znajdź idealny park rozrywki dla siebie! </div>
 <div class="left-content">Szukasz pomysłu na niezapomniany dzień pełen atrakcji? W naszej wyszukiwarce szybko znajdziesz parki rozrywki w całej Polsce. Wpisz nazwę miasta, województwa lub konkretnego parku, a my pokażemy Ci listę dostępnych miejsc wraz z opisem, lokalizacją i szczegółami, które pomogą Ci wybrać najlepszą opcję dla siebie i Twoich bliskich.</div>
 <div class="search-container">
-    <form action="#">
-        <input type="text" placeholder="Wpisz nazwę parku, miasto lub województwo">
+<!--    <form th:action="@{/main}" method="get">-->
+<!--        <input type="text" name="parkName" placeholder="Wpisz nazwę parku, miasto lub województwo" required pattern=".{3,}" title="Minimum 3 znaki">-->
+<!--        <input type="submit" value="Szukaj">-->
+<!--    </form>-->
+    <form th:action="@{/search}" method="get">
+        <input type="text" name="parkName" placeholder="Wpisz nazwę parku" required>
         <input type="submit" value="Szukaj">
     </form>
 </div>
+
+
 </body>
 </html>

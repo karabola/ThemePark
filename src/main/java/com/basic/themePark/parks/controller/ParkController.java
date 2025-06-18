@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/parks")
@@ -84,7 +85,7 @@ public class ParkController {
             province = provinceDao.save(newProvince);
         }
 
-        park = new Park(null, park.getName(), city, province, park.getDescription(), park.getImageUrl());
+        park = new Park(null, park.getName(), city, province, park.getDescription(), park.getImagesPaths());
         parkDao.save(park);
 
         return ResponseEntity.ok("Park added successfully!");
@@ -112,12 +113,14 @@ public class ParkController {
             park.setDescription(formattedDescription);
 
             model.addAttribute("park", park);
+            List<String> imgPaths = parkService.getImagesForPark(park);
+            model.addAttribute("imgPaths", imgPaths);
+
             return "park";
         }
 
         return "redirect:/parks";
     }
-
 
 //    @GetMapping("/{query}")
 //    public List<Park> getParksBySearch(@PathVariable String query) {

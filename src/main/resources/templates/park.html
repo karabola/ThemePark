@@ -36,11 +36,20 @@
 
     <div id="image-carousel" class="splide" style="margin: 60px auto; max-width: 90%;">
         <div class="splide__track">
+<!--            <ul class="splide__list">-->
+<!--                <li class="splide__slide"><img th:src="@{/parkImages/zatorland1.jpg}" alt="Zdjęcie 1"></li>-->
+<!--                <li class="splide__slide"><img th:src="@{/parkImages/zatorland2.jpg}" alt="Zdjęcie 2"></li>-->
+<!--            </ul>-->
             <ul class="splide__list">
-                <li class="splide__slide"><img th:src="@{/parkImages/1.jpg}" alt="Zdjęcie 1"></li>
-                <li class="splide__slide"><img th:src="@{/parkImages/2.jpg}" alt="Zdjęcie 2"></li>
+                <li class="splide__slide" th:each="img : ${imgPaths}">
+                    <img th:src="@{'/parkImages/' + ${img}}" alt="Zdjęcie parku">
+
+                </li>
             </ul>
         </div>
+    </div>
+    <div style="margin-top: 30px;">
+        <a href="/themePark/main" class="back-button">🏠 Strona główna</a>
     </div>
 
 </div>
