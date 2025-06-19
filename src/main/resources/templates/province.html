@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="'Parki w mieście: ' + ${selectedCity}">Parki w mieście</title>
+    <title th:text="'Parki w województwie: ' + ${selectedProvince}">Parki w województwie</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
     <style th:inline="text">
     body {
@@ -20,12 +20,12 @@
     </style>
 </head>
 <body>
-<div class="header" th:text="${'W miejscowości ' + selectedCity + ' znajdują się następujące parki:'}"
->
-    Parki rozrywki w mieście
+<div class="header" th:text="'Parki rozrywki w województwie: ' + ${selectedProvince}">
+    Parki rozrywki w województwie
 </div>
-th:text="${'Znaleziono ' + parkCount + ' ' + (parkCount == 1 ? 'park' : (parkCount < 5 && parkCount > 1 ? 'parki' : 'parków'))}"
-
+<div class="subheader" th:text="'Znaleziono ' + ${parkCount} + ' ' + (${parkCount} == 1 ? 'park' : (${parkCount} < 5 ? 'parki' : 'parków'))">
+    Znaleziono X parków
+</div>
 
 <ul class="park-list">
     <li th:each="park : ${parks}">

@@ -60,22 +60,5 @@ public class CityController {
         return ResponseEntity.ok("The new city has been added successfully!");
     }
 
-//    /**       przeniesione z parkController
-//     * @param cityName
-//     * @param model
-//     * @return http://localhost:8081/themePark/parks/zator
-//     */
-//    @GetMapping("/{cityName}")
-//    public String getParksByCity(@PathVariable("cityName") String cityName, Model model) {
-//        List<Park> parksInCity = parkService.getAllParks().stream()
-//                .filter(p -> p.getCity().getName().equalsIgnoreCase(cityName))
-//                .collect(Collectors.toList());
-//        if (cityName != null || !cityName.isEmpty()) {
 //
-//            model.addAttribute("parks", parksInCity);
-//        } else {
-//            model.addAttribute("parks", parkService.getAllParks());
-//        }
-//        return "parks";
-//    }
 }
