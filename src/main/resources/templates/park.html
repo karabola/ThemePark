@@ -17,10 +17,8 @@
         color: #001F4D;
     }
 
-
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-
 </head>
 <body>
 <div class="header">
@@ -36,10 +34,6 @@
 
     <div id="image-carousel" class="splide" style="margin: 60px auto; max-width: 90%;">
         <div class="splide__track">
-<!--            <ul class="splide__list">-->
-<!--                <li class="splide__slide"><img th:src="@{/parkImages/zatorland1.jpg}" alt="Zdjęcie 1"></li>-->
-<!--                <li class="splide__slide"><img th:src="@{/parkImages/zatorland2.jpg}" alt="Zdjęcie 2"></li>-->
-<!--            </ul>-->
             <ul class="splide__list">
                 <li class="splide__slide" th:each="img : ${imgPaths}">
                     <img th:src="@{'/parkImages/' + ${img}}" alt="Zdjęcie parku">
@@ -66,6 +60,8 @@
       }
     } ).mount();
   } );
+
+
 
 </script>
 </body>

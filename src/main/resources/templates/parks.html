@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>List of Parks</title>
+    <meta charset="UTF-8">
+    <title>Lista parków</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <style th:inline="text">
+    body {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-image: url([[${@environment.getProperty('server.servlet.context-path')}]]/part.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+        color: #001F4D;
+    }
+
+
+    </style>
 </head>
 <body>
-<h1 style="background-color: blue; color: white; padding: 10px;">List of Parks</h1>
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h2>Parks
-        </h2>
-    </div>
-    <div>
-        <table classes="table table-striped">
-            <thead>
-            <th style="border: 1px solid black; padding: 8px;">Name</th>
-            <th style="border: 1px solid black; padding: 8px;">City</th>
-            <th style="border: 1px solid black; padding: 8px;">Province</th>
-            <th style="border: 1px solid black; padding: 8px;">Description</th>
+<div class="header"> Najsłynniejsze parki rozrywki:</div>
 
-            </thead>
-            <tbody>
-            <tr th:each="park: ${parks}">
-                <td style="border: 1px solid black; padding: 8px;" th:text="${park.name}"></td>
-                <td style="border: 1px solid black; padding: 8px;" th:text="${park.city.name}"></td>
-                <td style="border: 1px solid black; padding: 8px;" th:text="${park.province.name}"></td>
-                <td style="border: 1px solid black; padding: 8px;" th:text="${park.description}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<ul class="park-list">
+    <li th:each="park : ${parks}">
+        <a th:href="@{'/parks/' + ${park.name}}"
+           th:text="${park.name + ', ' + park.city.name}">Park, Miasto</a>
+    </li>
+</ul>
+
+<div class="button-row-fixed">
+    <a href="javascript:history.back()" class="back-button">⬅️ Wróć</a>
+    <a href="/themePark/main" class="back-button">🏠 Strona główna</a>
 </div>
+
 </body>
 </html>

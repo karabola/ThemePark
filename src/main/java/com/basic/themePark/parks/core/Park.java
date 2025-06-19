@@ -31,6 +31,4 @@ public class Park {
     @Column(length = 1000)
     private String description;
     private List<String> imagesPaths;
-
-
 }
