@@ -2,3 +2,19 @@ server:
   port: 8081
   servlet:
     context-path:  /themePark
+spring:
+  application:
+    name: ThemePark
+  datasource:
+    url: jdbc:postgresql://192.168.99.100:5432/parks
+    username: postgres
+    password: secret
+    platform: postgres
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
