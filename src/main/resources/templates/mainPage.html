@@ -16,24 +16,22 @@
         font-family: Arial, sans-serif;
         color: #001F4D;
     }
-</style>
+
+    </style>
 </head>
-
-
 <body>
-<div class="header">Znajdź idealny park rozrywki dla siebie! </div>
-<div class="left-content">Szukasz pomysłu na niezapomniany dzień pełen atrakcji? W naszej wyszukiwarce szybko znajdziesz parki rozrywki w całej Polsce. Wpisz nazwę miasta, województwa lub konkretnego parku, a my pokażemy Ci listę dostępnych miejsc wraz z opisem, lokalizacją i szczegółami, które pomogą Ci wybrać najlepszą opcję dla siebie i Twoich bliskich.</div>
+<div class="header">Znajdź idealny park rozrywki dla siebie!</div>
+<div class="left-content">Szukasz pomysłu na niezapomniany dzień pełen atrakcji? W naszej wyszukiwarce szybko znajdziesz
+    parki rozrywki w całej Polsce. Wpisz nazwę miasta, województwa lub konkretnego parku, a my pokażemy Ci listę
+    dostępnych miejsc wraz z opisem, lokalizacją i szczegółami, które pomogą Ci wybrać najlepszą opcję dla siebie i
+    Twoich bliskich.
+</div>
 <div class="search-container">
-<!--    <form th:action="@{/main}" method="get">-->
-<!--        <input type="text" name="parkName" placeholder="Wpisz nazwę parku, miasto lub województwo" required pattern=".{3,}" title="Minimum 3 znaki">-->
-<!--        <input type="submit" value="Szukaj">-->
-<!--    </form>-->
     <form th:action="@{/search}" method="get">
-        <input type="text" name="parkName" placeholder="Wpisz nazwę parku" required>
+        <input type="text" name="parkName" placeholder="Wpisz nazwę parku, miasto lub województwo" required
+               pattern=".{3,}" title="Minimum 3 znaki">-->
         <input type="submit" value="Szukaj">
     </form>
 </div>
-
-
 </body>
 </html>
