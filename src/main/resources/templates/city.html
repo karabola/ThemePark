@@ -17,19 +17,19 @@
         color: #001F4D;
     }
 
+
     </style>
 </head>
 <body>
 <div class="header" th:text="${'W miejscowości ' + selectedCity + ' znajdują się następujące parki:'}"
->
-    Parki rozrywki w mieście
+>Parki rozrywki w mieście
 </div>
-th:text="${'Znaleziono ' + parkCount + ' ' + (parkCount == 1 ? 'park' : (parkCount < 5 && parkCount > 1 ? 'parki' : 'parków'))}"
-
-
+<div class="subheader" th:text="${'Znaleziono ' + parkCount + ' ' + (parkCount == 1 ? 'park' : (parkCount < 5 && parkCount > 1 ? 'parki' : 'parków'))}">
+    Znaleziono X parków
+</div>
 <ul class="park-list">
     <li th:each="park : ${parks}">
-        <a th:href="@{'/themePark/parks/' + ${park.name}}"
+        <a th:href="@{'/parks/' + ${park.name}}"
            th:text="${park.name}">Nazwa Parku</a>
     </li>
 </ul>

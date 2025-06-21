@@ -5,6 +5,7 @@ import com.basic.themePark.parks.core.Park;
 import com.basic.themePark.parks.dao.ParkDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -43,6 +44,14 @@ public class ParkService {
         } catch (IOException e) {
             return List.of();
         }
+    }
+
+    @Transactional
+    public Park addPark(Park park) {
+        if (park.getName() != null) {
+            parkDao.save(park);
+        }
+        return park;
     }
 
 }

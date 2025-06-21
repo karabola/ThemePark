@@ -13,6 +13,10 @@ spring:
     password: secret
     platform: postgres
     initialization-mode: always
+#  NOT RUN data.sql
+  sql:
+    init:
+      mode: never
 
   jpa:
     hibernate:

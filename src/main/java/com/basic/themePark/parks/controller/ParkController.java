@@ -121,18 +121,4 @@ public class ParkController {
 
         return "redirect:/parks";
     }
-
-//    @GetMapping("/{query}")
-//    public List<Park> getParksBySearch(@PathVariable String query) {
-//        return parkService.getAllParks().stream()
-//                .filter(p -> p.getName().equalsIgnoreCase(query) || p.getCity().getName().equalsIgnoreCase(query) || p.getProvince().getName().equalsIgnoreCase(query))
-//                .collect(Collectors.toList());
-//    }
-
-//    @GetMapping("/{cityName}")
-//    public List<Park> getParksByCity(@PathVariable String cityName) {
-//        List<Park> parksByCity = parkService.getParksByCity(cityName);
-//        System.out.println("parksByCity = " + parksByCity);
-//        return parksByCity;
-//    }
 }

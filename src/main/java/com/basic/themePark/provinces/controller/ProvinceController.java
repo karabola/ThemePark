@@ -25,10 +25,5 @@ public class ProvinceController {
     public List<Province> getProvince() {
         return provinceService.getAllProvinces();
     }
-
-    @PostMapping("/add")
-    public ResponseEntity<String> addProvince(@RequestBody Province province) {
-        provinceService.addProvince(province);
-        return ResponseEntity.ok("The new province has been added successfully!");
-    }
+    
 }

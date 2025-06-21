@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj województwo / miasto / park</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <style th:inline="text">
+    body {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-image: url([[${@environment.getProperty('server.servlet.context-path')}]]/part.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+        color: #001F4D;
+    }
+
+    form {
+        background-color: rgba(255,255,255,0.85);
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 600px;
+    }
+
+    label, input {
+        display: block;
+        margin: 10px 0;
+    }
+    </style>
+</head>
+<body>
+<div class="header">🔧 Panel dodawania: województwo / miasto / park</div>
+
+<!-- Formularz dodawania województwa -->
+<form th:action="@{/admin/provinces/add}" th:object="${province}" method="post">
+    <h3>Dodaj województwo</h3>
+    <label>Nazwa:</label>
+    <input type="text" th:field="*{name}" required />
+    <button type="submit">Dodaj województwo</button>
+</form>
+
+<!-- Formularz dodawania miasta -->
+<form th:action="@{/admin/cities/add}" th:object="${city}" method="post">
+    <h3>Dodaj miasto</h3>
+    <label>Nazwa miasta:</label>
+    <input type="text" th:field="*{name}" required />
+    <label>Województwo (nazwa):</label>
+    <input type="text" name="provinceName" required />
+    <button type="submit">Dodaj miasto</button>
+</form>
+
+<!-- Formularz dodawania parku -->
+<form th:action="@{/parks/add}" th:object="${park}" method="post">
+    <h3>Dodaj park</h3>
+    <label>Nazwa parku:</label>
+    <input type="text" th:field="*{name}" required />
+    <label>Miasto (nazwa):</label>
+    <input type="text" name="cityName" required />
+    <label>Województwo (nazwa):</label>
+    <input type="text" name="provinceName" required />
+    <label>Opis:</label>
+    <input type="text" th:field="*{description}" />
+    <label>Zdjęcia (ścieżki rozdzielone przecinkiem):</label>
+    <input type="text" name="images" />
+    <button type="submit">Dodaj park</button>
+</form>
+<div id="popupMessage" class="popup" th:if="${message}">
+    <div class="popup-content">
+        <span id="popupClose">&times;</span>
+        <p th:text="${message}"></p>
+    </div>
+</div>
+
+<div class="button-row-fixed">
+    <a href="javascript:history.back()" class="back-button">⬅️ Wróć</a>
+    <a href="/themePark/main" class="back-button">🏠 Strona główna</a>
+</div>
+<script th:inline="javascript">
+    window.onload = function () {
+        const closeBtn = document.getElementById('popupClose');
+        const popup = document.getElementById('popupMessage');
+
+        if (closeBtn && popup) {
+            closeBtn.addEventListener('click', () => {
+                popup.style.display = 'none';
+            });
+
+            // Automatycznie zamknij po 4 sekundach
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 4000);
+        }
+    };
+</script>
+
+</body>
+</html>
