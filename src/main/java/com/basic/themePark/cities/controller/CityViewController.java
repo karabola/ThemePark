@@ -1,7 +1,6 @@
 package com.basic.themePark.cities.controller;
 
-import com.basic.themePark.ParkHelper;
-import com.basic.themePark.cities.service.CityService;
+import com.basic.themePark.ParkHelperNEW;
 import com.basic.themePark.parks.core.Park;
 import com.basic.themePark.parks.service.ParkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.text.Normalizer;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +17,7 @@ import java.util.stream.Collectors;
 @Controller
 public class CityViewController {
     @Autowired
-    private ParkHelper parkHelper;
+    private ParkHelperNEW parkHelperNEW;
     @Autowired
     private ParkService parkService;
 
@@ -37,13 +35,13 @@ public class CityViewController {
      */
     @GetMapping("/{cityName}")
     public String showParksByCity(@PathVariable String cityName, Model model) {
-        String simplifyCityName = parkHelper.simplify(cityName);
+        String simplifyCityName = parkHelperNEW.simplify(cityName);
         
         List<Park> parksInCity = parkService.getAllParks().stream()
-                .filter(p -> parkHelper.simplify(p.getCity().getName()).equals(simplifyCityName))
+                .filter(p -> parkHelperNEW.simplify(p.getCity().getName()).equals(simplifyCityName))
                 .collect(Collectors.toList());
         model.addAttribute("parks", parksInCity);
-        model.addAttribute("selectedCity", parkHelper.capitalizeWordsFlexible(cityName));
+        model.addAttribute("selectedCity", parkHelperNEW.capitalizeWordsFlexible(cityName));
         model.addAttribute("parkCount", parksInCity.size());
 
         return "city";
