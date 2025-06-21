@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Parki w województwie: ' + ${selectedProvince}">Parki w województwie</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <style th:inline="text">
+    body {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-image: url([[${@environment.getProperty('server.servlet.context-path')}]]/part.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+        color: #001F4D;
+    }
+
+    </style>
+</head>
+<body>
+<div class="header" th:text="'Parki rozrywki w województwie: ' + ${selectedProvince}">
+    Parki rozrywki w województwie
+</div>
+<div class="subheader" th:text="'Znaleziono ' + ${parkCount} + ' ' + (${parkCount} == 1 ? 'park' : (${parkCount} < 5 ? 'parki' : 'parków'))">
+    Znaleziono X parków
+</div>
+
+<ul class="park-list">
+    <li th:each="park : ${parks}">
+        <a th:href="@{'/themePark/parks/' + ${park.name}}"
+           th:text="${park.name}">Nazwa Parku</a>
+    </li>
+</ul>
+
+<div class="button-row-fixed">
+    <a href="javascript:history.back()" class="back-button">⬅️ Wróć</a>
+    <a href="/themePark/main" class="back-button">🏠 Strona główna</a>
+</div>
+
+</body>
+</html>
